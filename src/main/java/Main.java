@@ -52,11 +52,12 @@ public class Main {
     }
 
     public static boolean correctPrice(double price) {
-       if(price > 0) {
-            return true;
-        } else {
+       if(price < 0) {
             return false;
-        }
+        } else {
+           return true;
+       }
+
     }
 }
 
