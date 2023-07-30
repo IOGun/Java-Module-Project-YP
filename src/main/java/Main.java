@@ -4,11 +4,16 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int persons;
+        int persons = 0;
 
         while(true){
             System.out.println("На скольких человек необходимо разделить счёт?");
-            persons = scanner.nextInt();
+            try {
+                persons = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Ошибка ввода! Программа остановлена.");
+                return;
+            }
             if (persons > 1) {
                 break;
             } else if (persons == 1) {
@@ -18,6 +23,7 @@ public class Main {
             }
         }
 
+
         Calculator calculator = new Calculator();
         Product product = new Product();
 
@@ -26,8 +32,13 @@ public class Main {
             product.name = scanner.next();
             while(true){
                 System.out.println("Введите стоимость товара \"" + product.name + "\"");
-                //double price = Double.parseDouble(scanner.next()); // Ввод числа через точку. Например: 12.0 <Enter>
-                double price =scanner.nextDouble(); // Ввод числа через запятую. Например: 12,1 <Enter>
+                double price;
+                try {
+                    price = scanner.nextDouble();
+                } catch (Exception e) {
+                    System.out.println("Ошибка ввода! Программа остановлена.");
+                    return;
+                }
                 if(correctPrice(price)){
                     product.price = price;
                     break;
@@ -58,43 +69,5 @@ public class Main {
            return true;
        }
 
-    }
-}
-
-class Calculator {
-    String products = "";
-    double totalPrice;
-    void addNewProduct(Product newProduct){
-        products += newProduct.name.concat("\n");
-        totalPrice += newProduct.price;
-    }
-    double moneyForEach(int persons){
-        return totalPrice/persons;
-    }
-}
-
-class Product {
-    String name;
-    double price;
-}
-
-class Formatter {
-    double price;
-    String messageTemlate = "%.2f %s";
-    Formatter(double price){
-        this.price = price;
-    }
-    double roundUpPrice() {
-        return Math.floor(price);
-    }
-    String formatOut() {
-        double price = roundUpPrice();
-        if(price == 1) {
-            return String.format(messageTemlate, this.price , "рубль");
-        } else if ((price > 1) && (price <= 4) ) {
-            return String.format(messageTemlate, this.price , "рубля");
-        } else {
-            return String.format(messageTemlate, this.price , "рублей");
-        }
     }
 }
