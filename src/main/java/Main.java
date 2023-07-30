@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int persons = 0;
+        int persons ;
 
         while(true){
             System.out.println("На скольких человек необходимо разделить счёт?");
@@ -31,7 +31,7 @@ public class Main {
             System.out.println("Введите название товара");
             product.name = scanner.next();
             while(true){
-                System.out.println("Введите стоимость товара \"" + product.name + "\"");
+                System.out.println("Введите стоимость товара \"" + product.name + "\" в формате \"рубли,копейки\", например 12,20");
                 double price;
                 try {
                     price = scanner.nextDouble();
